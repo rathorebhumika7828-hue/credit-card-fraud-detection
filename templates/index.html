@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fraud Detection System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>💳 Credit Card Fraud Detection</h1>
+    <p>Enter transaction details</p>
+
+    <form method="POST">
+
+        <label>Time</label>
+        <input type="number" name="Time" step="any" required>
+
+        {% for i in range(1, 29) %}
+            <label>V{{ i }}</label>
+            <input type="number" name="V{{ i }}" step="any" required>
+        {% endfor %}
+
+        <label>Amount</label>
+        <input type="number" name="Amount" step="any" required>
+
+        <button type="submit">Predict Transaction</button>
+
+    </form>
+
+    {% if result %}
+        <div class="result">
+            <h2>{{ result }}</h2>
+
+            {% if probability is not none %}
+                <p>Fraud Probability: {{ "%.2f"|format(probability) }}%</p>
+            {% endif %}
+        </div>
+    {% endif %}
+
+</div>
+
+</body>
+</html>
